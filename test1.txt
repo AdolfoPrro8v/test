@@ -1,0 +1,123 @@
+---------------------------------------------------
+ct-Catalogos
+rg-Registros
+cf-Configuracion
+---------------------------------------------------
+
+
+ctEmpresas
+    *idEmpresa
+    epNombre
+    epTelefono
+    epDireccion
+    epCorreo
+
+rgLicencias
+    *idLicencia
+    +idEmpresa
+    lcClave
+    lcEstatus
+        1-Activado
+        0-Desactivado
+    lcFechaInicio
+    lcFechaFin
+
+ctModulos
+    *idModulo
+    mdNombre
+    mdDescripcion
+
+rgLicenciasModulos
+    *idLicenciasModulos
+    +idLicencia
+    +idModulo
+
+cfGenerales 
+    *idConfiguracion
+    +idEmpresa
+    cgNombre
+    cgDescripcion
+    cgValor
+    cgEstatus
+        1-Activado
+        0-Desactivado
+
+ctTipoMaterial
+    *idTipoMaterial
+    +idEmpresa
+    tmNombre
+    tmDescripcion
+
+
+ctMateriales
+    *idMaterial
+    +idTipoMaterial
+    mtClave
+    mtNombre
+    mtMedida
+    mtPrecio
+    mtEstatus
+        1-Activado
+        0-Desactivado
+
+
+ctFormas
+    *idForma
+    +idEmpresa
+    frClave
+    frNombre
+    frDescripcion
+    frEstatus
+        1-Activado
+        0-Desactivado
+
+rgFormasMateriales
+    *idFormaMateriales
+    +idForma
+    +idTipoMaterial
+
+ctUsuario
+    *idUsuario
+    +idEmpresa
+    usNombre
+    usApellido
+    usMail
+    usPassword
+
+ctCliente
+    *idCliente
+    +idEmpresa
+    clNombre
+    clTelefono
+    clMail
+    clDireccion
+
+rgCotizacionUnitaria
+    *idCU
+    +idCleinte
+    +idUsuario(Creada por)
+    +idForma
+    cuFecha
+    cuTotal
+
+rgDetalleCotizacionUnitaria
+    *idDCU
+    +idCU
+    +idMaterial
+    dcuCantidad
+    dcuPrecioUnitario
+    dcuTotal
+
+rgCotizacionGlobal
+    *idCG
+    +idCleinte
+    +idUsuario(Creada por)
+    cgFecha
+    cgTotal
+
+rgDetalleCotizacionGlobal
+    *idDCG
+    +idCG
+    +idCU
+    dcgPrecioUnitario
+    dcgTotal
